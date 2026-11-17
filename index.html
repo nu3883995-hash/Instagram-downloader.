@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#833ab4"><title>Instagram Video Downloader</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);font-family:Arial,sans-serif;color:#222}
+.card{width:min(100%,510px);background:#fff;border-radius:24px;padding:32px;box-shadow:0 20px 60px #24102c40;text-align:center}.brand{width:72px;height:72px;margin:0 auto 16px;border-radius:22px;display:grid;place-items:center;color:white;font-size:38px;background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045)}
+h1{font-size:27px;margin:0 0 10px}.sub{color:#6c6c75;line-height:1.55;font-size:14px;margin:0 0 25px}.input-wrap{display:flex;gap:8px;border:1px solid #dedee5;border-radius:13px;padding:6px}input{min-width:0;flex:1;border:0;outline:0;padding:12px 9px;font-size:14px}.secondary{border:0;border-radius:9px;background:#f0edf3;padding:0 13px;font-weight:700;cursor:pointer;color:#4b315b}.primary{width:100%;margin-top:13px;padding:15px;border:0;border-radius:12px;color:white;font-size:16px;font-weight:700;background:linear-gradient(90deg,#833ab4,#fd1d1d);cursor:pointer}.primary:disabled{opacity:.6;cursor:wait}.status{min-height:44px;margin-top:16px;font-size:13px;line-height:1.5;color:#555}.status.error{color:#b42318}.status.ok{color:#167647}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}.feature{background:#faf6fb;border-radius:12px;padding:13px 5px;font-size:12px;color:#555}.feature b{display:block;font-size:20px;margin-bottom:5px}footer{font-size:11px;line-height:1.5;color:#888;margin-top:23px}@media(max-width:420px){.card{padding:25px 18px}h1{font-size:24px}}
+</style></head>
+<body><main class="card">
+<div class="brand" aria-hidden="true">◎</div><h1>Instagram Video Downloader</h1>
+<p class="sub">Paste a public Instagram Reel or post link to save a video you own or have permission to download.</p>
+<form id="form"><div class="input-wrap"><input id="url" type="url" placeholder="https://www.instagram.com/reel/..." required autocomplete="url"><button class="secondary" type="button" id="paste">Paste</button></div><button class="primary" id="submit" type="submit">⬇ Download video</button></form>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<div class="features"><div class="feature"><b>🎬</b>Reels & posts</div><div class="feature"><b>⚡</b>Simple process</div><div class="feature"><b>📱</b>Mobile friendly</div></div>
+<footer>Only download content you own or are authorized to save. Private or login-restricted posts are not supported. Respect copyright and Instagram's terms.</footer>
+</main><script>
+const form=document.querySelector('#form'),input=document.querySelector('#url'),statusBox=document.querySelector('#status'),submit=document.querySelector('#submit');
+function show(message,type=''){statusBox.textContent=message;statusBox.className='status '+type;}
+document.querySelector('#paste').addEventListener('click',async()=>{try{input.value=await navigator.clipboard.readText();show('Link pasted. Press Download video.','ok')}catch{show('Clipboard access unavailable. Paste the link into the box.')}});
+form.addEventListener('submit',async e=>{e.preventDefault();const url=input.value.trim();if(!url){show('Please paste an Instagram link.','error');return;}submit.disabled=true;submit.textContent='⏳ Preparing download…';show('Checking the public post. Please wait…');try{const response=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const type=response.headers.get('content-type')||'';if(!response.ok){const data=type.includes('application/json')?await response.json():{error:'Download failed.'};throw new Error(data.error||'Download failed.');}const blob=await response.blob();const disposition=response.headers.get('content-disposition')||'';const match=disposition.match(/filename="?([^";]+)"?/i);const filename=match?match[1]:'instagram-video.mp4';const objectUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=objectUrl;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(objectUrl);show('Your video download has started.','ok');}catch(err){show(err.message||'Something went wrong. Please try again.','error');}finally{submit.disabled=false;submit.textContent='⬇ Download video';}});
+</script></body></html>
