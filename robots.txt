@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://instagram-downloader-2-7ct4.onrender.com/sitemap.xml
