@@ -1,4 +1,3 @@
-
 FROM node:20-bookworm-slim
 
 RUN apt-get update \
@@ -9,11 +8,11 @@ RUN apt-get update \
 
 WORKDIR /app
 
-COPY instagram-downloader/package*.json ./
+COPY package*.json ./
 
 RUN npm install --omit=dev
 
-COPY instagram-downloader/ ./
+COPY . .
 
 ENV NODE_ENV=production
 
