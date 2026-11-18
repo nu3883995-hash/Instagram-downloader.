@@ -1,0 +1,13 @@
+
+{
+  "name": "instagram-public-video-downloader",
+  "version": "1.0.0",
+  "description": "Download public Instagram videos you are authorized to save",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
