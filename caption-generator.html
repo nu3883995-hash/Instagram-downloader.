@@ -1,68 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Create engaging social media captions and hashtags for Facebook, Instagram and YouTube with our free caption generator.">
+<meta name="description" content="Generate free English and Hindi social media captions and hashtags for Facebook, Instagram and YouTube.">
 <meta name="theme-color" content="#833ab4">
-<title>Free Social Media Caption Generator</title>
-
+<title>Free English and Hindi Caption Generator</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;padding:20px;min-height:100vh;
- font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
- color:#29232e;
-}
-.container{
- max-width:720px;margin:35px auto;background:white;
- padding:28px;border-radius:20px;
- box-shadow:0 12px 35px #0002;
-}
+body{margin:0;padding:20px;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#29232e}
+.container{max-width:720px;margin:35px auto;background:white;padding:28px;border-radius:20px;box-shadow:0 12px 35px #0002}
 h1{text-align:center;color:#833ab4;margin-top:5px}
 .intro{text-align:center;color:#666;line-height:1.6}
 label{display:block;font-weight:bold;margin:18px 0 8px}
-input,select,textarea{
- width:100%;padding:13px;border:1px solid #ddd;
- border-radius:10px;font-size:16px;
-}
+input,select,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
 textarea{min-height:95px;resize:vertical}
-button{
- border:0;border-radius:10px;padding:13px 18px;
- font-size:15px;font-weight:bold;cursor:pointer;
-}
-.generate{
- width:100%;margin-top:22px;color:white;
- background:linear-gradient(90deg,#833ab4,#fd1d1d);
-}
+button{border:0;border-radius:10px;padding:13px 18px;font-size:15px;font-weight:bold;cursor:pointer}
+.generate{width:100%;margin-top:22px;color:white;background:linear-gradient(90deg,#833ab4,#fd1d1d)}
 .copy{background:#833ab4;color:white;margin-top:10px}
 .secondary{background:#eee;color:#333;margin-top:10px}
-.result{
- background:#faf7ff;border:1px solid #e8dafa;
- border-radius:12px;padding:17px;margin-top:20px;
- line-height:1.7;white-space:pre-wrap;
-}
+.result{background:#faf7ff;border:1px solid #e8dafa;border-radius:12px;padding:17px;margin-top:20px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
 footer{text-align:center;margin-top:25px;color:#777;font-size:13px}
 a{color:#833ab4;text-decoration:none}
 </style>
 </head>
-
 <body>
 <div class="container">
 
 <h1>✨ Social Media Caption Generator</h1>
-<p class="intro">
-Create attractive captions and hashtags for your social media posts.
-Free, simple and easy to use!
-</p>
+<p class="intro">Create attractive English and Hindi captions and hashtags for your social media posts!</p>
 
 <label for="platform">Choose Platform</label>
 <select id="platform">
 <option value="Facebook">Facebook</option>
 <option value="Instagram">Instagram</option>
 <option value="YouTube">YouTube</option>
+</select>
+
+<label for="language">Choose Caption Language</label>
+<select id="language">
+<option value="English">English</option>
+<option value="Hindi">Hindi (हिंदी)</option>
+<option value="Both">Both English and Hindi</option>
 </select>
 
 <label for="category">Choose Caption Category</label>
@@ -79,68 +58,103 @@ Free, simple and easy to use!
 <label for="topic">Enter Your Topic</label>
 <textarea id="topic" placeholder="Example: Never give up on your dreams..."></textarea>
 
-<button class="generate" onclick="generateCaption()">
-✨ Generate Caption
-</button>
+<button class="generate" onclick="generateCaption()">✨ Generate Caption</button>
 
 <div id="result" class="result" hidden></div>
 
-<button class="copy" id="copyBtn" onclick="copyCaption()" hidden>
-📋 Copy Caption
-</button>
-
-<button class="secondary" id="againBtn" onclick="generateCaption()" hidden>
-🔄 Generate Another
-</button>
+<button class="copy" id="copyBtn" onclick="copyCaption()" hidden>📋 Copy Caption</button>
+<button class="secondary" id="againBtn" onclick="generateCaption()" hidden>🔄 Generate Another</button>
 
 <footer>
-<p>Free Social Media Caption Generator</p>
+<p>Free English and Hindi Social Media Caption Generator</p>
 <p><a href="/">Home</a> | <a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a></p>
 </footer>
-
 </div>
 
 <script>
 const templates = {
-Motivational: [
+Motivational:{
+English:[
 "Every new day is another chance to work towards your dreams. Keep believing in yourself! 💪",
 "Success begins when you decide not to give up. Keep moving forward! 🚀",
 "Your journey may be difficult, but every small step takes you closer to your goal. ✨"
 ],
-Emotional: [
+Hindi:[
+"हर नया दिन अपने सपनों को पूरा करने का एक नया मौका है। खुद पर भरोसा रखिए! 💪",
+"सफलता की शुरुआत तब होती है जब आप हार मानने से इनकार कर देते हैं। आगे बढ़ते रहिए! 🚀",
+"रास्ता मुश्किल हो सकता है, लेकिन आपका हर छोटा कदम आपको मंजिल के करीब ले जाता है। ✨"
+]},
+Emotional:{
+English:[
 "Some feelings cannot be explained in words. They are simply felt by the heart. ❤️",
 "Life teaches us valuable lessons through every experience. Stay strong and keep smiling. ❤️",
 "Behind every smile, there is a story that only the heart understands. 🌸"
 ],
-Business: [
+Hindi:[
+"कुछ एहसास शब्दों में बयां नहीं किए जा सकते, उन्हें सिर्फ दिल महसूस करता है। ❤️",
+"जिंदगी का हर अनुभव हमें एक नई सीख देता है। मजबूत रहिए और मुस्कुराते रहिए। ❤️",
+"हर मुस्कान के पीछे एक कहानी होती है, जिसे सिर्फ दिल समझता है। 🌸"
+]},
+Business:{
+English:[
 "Quality, trust and customer satisfaction are the foundation of every successful business. 🤝",
 "Thank you for supporting our business. Your trust inspires us to do better every day! ❤️",
 "Great products and honest service make every customer relationship special. ✨"
 ],
-Love: [
+Hindi:[
+"गुणवत्ता, भरोसा और ग्राहकों की संतुष्टि ही हर सफल व्यापार की असली पहचान है। 🤝",
+"हमारे व्यापार को समर्थन देने के लिए धन्यवाद। आपका विश्वास हमें हर दिन बेहतर बनने की प्रेरणा देता है! ❤️",
+"बेहतरीन उत्पाद और ईमानदार सेवा हर ग्राहक के साथ एक खास रिश्ता बनाते हैं। ✨"
+]},
+Love:{
+English:[
 "True friendship is a beautiful gift that makes life's journey brighter. ❤️",
 "Some people make ordinary moments unforgettable. Cherish them! 🌹",
 "Love and kindness make the world a more beautiful place. ❤️"
 ],
-Nature: [
+Hindi:[
+"सच्ची दोस्ती एक खूबसूरत तोहफा है, जो जिंदगी के सफर को और भी सुंदर बना देती है। ❤️",
+"कुछ लोग साधारण पलों को भी यादगार बना देते हैं। उनकी कदर कीजिए! 🌹",
+"प्यार और दयालुता इस दुनिया को और भी खूबसूरत बनाते हैं। ❤️"
+]},
+Nature:{
+English:[
 "Nature reminds us to slow down, breathe and appreciate the beauty around us. 🌿",
 "Every sunrise brings a fresh beginning and a new reason to smile. ☀️",
 "Find peace in the little moments and beauty in the world around you. 🌸"
 ],
-Success: [
+Hindi:[
+"प्रकृति हमें सिखाती है कि थोड़ा ठहरें, सुकून से सांस लें और आसपास की खूबसूरती को महसूस करें। 🌿",
+"हर सूर्योदय एक नई शुरुआत और मुस्कुराने की नई वजह लेकर आता है। ☀️",
+"छोटे-छोटे पलों में सुकून और अपने आसपास की दुनिया में खूबसूरती तलाशिए। 🌸"
+]},
+Success:{
+English:[
 "Dream big, work honestly and stay patient. Your efforts matter! 🏆",
 "Every achievement begins with a small step and a strong determination. 🚀",
 "Build your future with courage, consistency and confidence. ✨"
 ],
-Funny: [
+Hindi:[
+"बड़े सपने देखिए, ईमानदारी से मेहनत कीजिए और धैर्य रखिए। आपकी मेहनत जरूर मायने रखती है! 🏆",
+"हर बड़ी उपलब्धि की शुरुआत एक छोटे कदम और मजबूत इरादे से होती है। 🚀",
+"हिम्मत, निरंतर मेहनत और आत्मविश्वास के साथ अपना भविष्य बनाइए। ✨"
+]},
+Funny:{
+English:[
 "Life is short, so laugh whenever you get the chance! 😂",
 "Taking life seriously is optional. Smiling is always a good idea! 😄",
 "My plans are perfect until reality joins the conversation! 😂"
-]
+],
+Hindi:[
+"जिंदगी छोटी है, इसलिए जब भी मौका मिले खुलकर हंसिए! 😂",
+"जिंदगी को हमेशा गंभीरता से लेना जरूरी नहीं, मुस्कुराना हमेशा अच्छा विचार है! 😄",
+"मेरी सारी योजनाएं तब तक शानदार होती हैं, जब तक हकीकत सामने नहीं आती! 😂"
+]}
 };
 
 function generateCaption(){
  const platform=document.getElementById("platform").value;
+ const language=document.getElementById("language").value;
  const category=document.getElementById("category").value;
  const topic=document.getElementById("topic").value.trim();
 
@@ -150,9 +164,9 @@ function generateCaption(){
  }
 
  const options=templates[category];
- const caption=options[Math.floor(Math.random()*options.length)];
-
- const cleanTopic=topic.replace(/[<>]/g,"").slice(0,200);
+ const index=Math.floor(Math.random()*options.English.length);
+ const english=options.English[index];
+ const hindi=options.Hindi[index];
 
  const hashtags={
  Facebook:"#Facebook #SocialMedia #DailyInspiration",
@@ -160,10 +174,18 @@ function generateCaption(){
  YouTube:"#YouTube #NewVideo #ContentCreator"
  };
 
- const output=
- caption+"\n\nTopic: "+cleanTopic+
- "\n\n"+hashtags[platform]+
- " #"+category.replace(/\s+/g,"");
+ let caption="";
+ if(language==="English"){
+  caption=english;
+ }else if(language==="Hindi"){
+  caption=hindi;
+ }else{
+  caption="🇬🇧 ENGLISH:\n"+english+"\n\n🇮🇳 हिंदी:\n"+hindi;
+ }
+
+ const cleanTopic=topic.replace(/[<>]/g,"").slice(0,200);
+ const output=caption+"\n\nTopic: "+cleanTopic+
+ "\n\n"+hashtags[platform]+" #"+category.replace(/\s+/g,"");
 
  const result=document.getElementById("result");
  result.textContent=output;
@@ -174,11 +196,27 @@ function generateCaption(){
 
 function copyCaption(){
  const text=document.getElementById("result").textContent;
- navigator.clipboard.writeText(text).then(()=>{
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text).then(()=>{
+   alert("Caption copied successfully!");
+  }).catch(()=>fallbackCopy(text));
+ }else{
+  fallbackCopy(text);
+ }
+}
+
+function fallbackCopy(text){
+ const area=document.createElement("textarea");
+ area.value=text;
+ document.body.appendChild(area);
+ area.select();
+ try{
+  document.execCommand("copy");
   alert("Caption copied successfully!");
- }).catch(()=>{
+ }catch(e){
   alert("Please select and copy the caption manually.");
- });
+ }
+ area.remove();
 }
 </script>
 </body>
