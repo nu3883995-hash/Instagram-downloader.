@@ -1,222 +1,515 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Generate free English and Hindi social media captions and hashtags for Facebook, Instagram and YouTube.">
+<meta name="description" content="Create social media captions and hashtags in English, Hindi, Hinglish and Bengali. Generate captions for Facebook, Instagram and YouTube.">
 <meta name="theme-color" content="#833ab4">
-<title>Free English and Hindi Caption Generator</title>
+<title>Free Social Media Caption & Hashtag Generator</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;padding:20px;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#29232e}
-.container{max-width:720px;margin:35px auto;background:white;padding:28px;border-radius:20px;box-shadow:0 12px 35px #0002}
-h1{text-align:center;color:#833ab4;margin-top:5px}
-.intro{text-align:center;color:#666;line-height:1.6}
-label{display:block;font-weight:bold;margin:18px 0 8px}
-input,select,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
-textarea{min-height:95px;resize:vertical}
-button{border:0;border-radius:10px;padding:13px 18px;font-size:15px;font-weight:bold;cursor:pointer}
-.generate{width:100%;margin-top:22px;color:white;background:linear-gradient(90deg,#833ab4,#fd1d1d)}
-.copy{background:#833ab4;color:white;margin-top:10px}
-.secondary{background:#eee;color:#333;margin-top:10px}
-.result{background:#faf7ff;border:1px solid #e8dafa;border-radius:12px;padding:17px;margin-top:20px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
-footer{text-align:center;margin-top:25px;color:#777;font-size:13px}
-a{color:#833ab4;text-decoration:none}
+body{
+ margin:0;padding:20px;min-height:100vh;
+ background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);
+ font-family:Arial,sans-serif;color:#222;
+}
+.container{
+ max-width:850px;margin:25px auto;background:#fff;
+ padding:28px;border-radius:18px;
+ box-shadow:0 10px 35px #0002;
+}
+h1{text-align:center;color:#833ab4;margin-top:0}
+.intro{text-align:center;color:#555;line-height:1.6}
+label{display:block;font-weight:bold;margin:17px 0 7px}
+select,input{
+ width:100%;padding:13px;border:1px solid #ddd;
+ border-radius:9px;font-size:15px;background:#fff;
+}
+textarea{
+ width:100%;min-height:150px;padding:14px;
+ border:1px solid #ddd;border-radius:9px;
+ font-size:15px;line-height:1.6;resize:vertical;
+}
+button{
+ border:0;padding:13px 17px;border-radius:9px;
+ font-size:15px;font-weight:bold;cursor:pointer;
+ margin:7px 5px 0 0;color:#fff;
+}
+.primary{background:#833ab4}
+.secondary{background:#e1306c}
+.green{background:#159b63}
+.dark{background:#333}
+button:hover{opacity:.88}
+.result{
+ margin-top:24px;padding:18px;border-radius:12px;
+ background:#f7f2ff;border:1px solid #e5d7ff;
+}
+.result h2{color:#833ab4;font-size:19px}
+.hidden{display:none}
+.note{font-size:13px;color:#666;line-height:1.5}
+footer{text-align:center;margin-top:25px;color:#666;font-size:13px}
+footer a{color:#833ab4;text-decoration:none;margin:5px}
 </style>
 </head>
+
 <body>
 <div class="container">
 
 <h1>✨ Social Media Caption Generator</h1>
-<p class="intro">Create attractive English and Hindi captions and hashtags for your social media posts!</p>
+<p class="intro">
+Create attractive captions and hashtags for Facebook,
+Instagram and YouTube — completely free!
+</p>
 
-<label for="platform">Choose Platform</label>
+<label for="platform">Select Platform</label>
 <select id="platform">
 <option value="Facebook">Facebook</option>
 <option value="Instagram">Instagram</option>
 <option value="YouTube">YouTube</option>
 </select>
 
-<label for="language">Choose Caption Language</label>
-<select id="language">
-<option value="English">English</option>
-<option value="Hindi">Hindi (हिंदी)</option>
-<option value="Both">Both English and Hindi</option>
-</select>
-
-<label for="category">Choose Caption Category</label>
+<label for="category">Select Caption Category</label>
 <select id="category">
-<option value="Motivational">Motivational</option>
-<option value="Emotional">Emotional</option>
-<option value="Business">Business</option>
-<option value="Love">Love and Friendship</option>
-<option value="Nature">Nature and Travel</option>
-<option value="Success">Success and Dreams</option>
-<option value="Funny">Funny</option>
+<option value="motivational">Motivational</option>
+<option value="emotional">Emotional</option>
+<option value="business">Business</option>
+<option value="love">Love & Friendship</option>
+<option value="nature">Nature & Travel</option>
+<option value="success">Success & Dreams</option>
+<option value="funny">Funny</option>
+<option value="islamic">Islamic</option>
+<option value="festival">Festival</option>
+<option value="birthday">Birthday</option>
+<option value="promotion">Business Promotion</option>
+<option value="life">Life Lessons</option>
 </select>
 
-<label for="topic">Enter Your Topic</label>
-<textarea id="topic" placeholder="Example: Never give up on your dreams..."></textarea>
+<label for="language">Select Language</label>
+<select id="language">
+<option value="en">English</option>
+<option value="hi">Hindi (हिंदी)</option>
+<option value="hinglish">Hinglish</option>
+<option value="bn">Bengali (বাংলা)</option>
+<option value="both">English + Hindi</option>
+</select>
 
-<button class="generate" onclick="generateCaption()">✨ Generate Caption</button>
+<label for="length">Caption Length</label>
+<select id="length">
+<option value="short">Short</option>
+<option value="medium" selected>Medium</option>
+<option value="long">Long</option>
+</select>
 
-<div id="result" class="result" hidden></div>
+<label for="topic">Enter Your Topic (Optional)</label>
+<input id="topic" type="text"
+placeholder="Example: My new shop, hard work, birthday, nature...">
 
-<button class="copy" id="copyBtn" onclick="copyCaption()" hidden>📋 Copy Caption</button>
-<button class="secondary" id="againBtn" onclick="generateCaption()" hidden>🔄 Generate Another</button>
+<button class="primary" onclick="generateCaption()">
+✨ Generate Caption
+</button>
+
+<button class="secondary" onclick="generateHashtags()">
+# Generate Hashtags
+</button>
+
+<div id="captionResult" class="result hidden">
+<h2>Your Caption</h2>
+<textarea id="captionOutput" readonly></textarea>
+<button class="green" onclick="copyCaption()">Copy Caption</button>
+<button class="dark" onclick="generateCaption()">Generate Another</button>
+</div>
+
+<div id="hashtagResult" class="result hidden">
+<h2>Your Hashtags</h2>
+<textarea id="hashtagOutput" readonly></textarea>
+<button class="green" onclick="copyHashtags()">Copy Hashtags</button>
+</div>
+
+<div id="downloadResult" class="result hidden">
+<h2>Download Your Content</h2>
+<p class="note">Save your generated caption and hashtags together in a text file.</p>
+<button class="primary" onclick="downloadContent()">⬇ Download TXT File</button>
+</div>
+
+<p class="note">
+This free generator uses built-in caption templates. It does not use an AI API.
+</p>
 
 <footer>
-<p>Free English and Hindi Social Media Caption Generator</p>
-<p><a href="/">Home</a> | <a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a></p>
+<p>
+<a href="/">Home</a> |
+<a href="/about.html">About Us</a> |
+<a href="/contact.html">Contact Us</a> |
+<a href="/privacy.html">Privacy Policy</a> |
+<a href="/terms.html">Terms</a>
+</p>
+<p>© 2026 Social Media Caption Generator</p>
 </footer>
+
 </div>
 
 <script>
-const templates = {
-Motivational:{
-English:[
-"Every new day is another chance to work towards your dreams. Keep believing in yourself! 💪",
-"Success begins when you decide not to give up. Keep moving forward! 🚀",
-"Your journey may be difficult, but every small step takes you closer to your goal. ✨"
+const captions = {
+motivational:{
+en:[
+"Never stop believing in yourself. Every small step takes you closer to your dreams.",
+"Your journey may be difficult, but your determination can make the impossible possible."
 ],
-Hindi:[
-"हर नया दिन अपने सपनों को पूरा करने का एक नया मौका है। खुद पर भरोसा रखिए! 💪",
-"सफलता की शुरुआत तब होती है जब आप हार मानने से इनकार कर देते हैं। आगे बढ़ते रहिए! 🚀",
-"रास्ता मुश्किल हो सकता है, लेकिन आपका हर छोटा कदम आपको मंजिल के करीब ले जाता है। ✨"
+hi:[
+"खुद पर विश्वास रखिए। आपका हर छोटा कदम आपको आपके सपनों के करीब ले जाता है।",
+"सफर मुश्किल हो सकता है, लेकिन आपकी मेहनत आपको मंजिल तक जरूर पहुंचा सकती है।"
+],
+hinglish:[
+"Khud par bharosa rakho. Har chhota kadam tumhe tumhare sapno ke kareeb le jata hai.",
+"Safar mushkil ho sakta hai, lekin mehnat karne walon ki haar kabhi nahi hoti."
+],
+bn:[
+"নিজের উপর বিশ্বাস রাখুন। প্রতিটি ছোট পদক্ষেপ আপনাকে স্বপ্নের আরও কাছে নিয়ে যায়।",
+"পথ কঠিন হতে পারে, কিন্তু পরিশ্রম আপনাকে একদিন সফলতার পথে নিয়ে যাবে।"
 ]},
-Emotional:{
-English:[
-"Some feelings cannot be explained in words. They are simply felt by the heart. ❤️",
-"Life teaches us valuable lessons through every experience. Stay strong and keep smiling. ❤️",
-"Behind every smile, there is a story that only the heart understands. 🌸"
+emotional:{
+en:[
+"Some feelings cannot be explained in words. They can only be felt by the heart.",
+"Life teaches us many lessons, and some memories stay with us forever."
 ],
-Hindi:[
-"कुछ एहसास शब्दों में बयां नहीं किए जा सकते, उन्हें सिर्फ दिल महसूस करता है। ❤️",
-"जिंदगी का हर अनुभव हमें एक नई सीख देता है। मजबूत रहिए और मुस्कुराते रहिए। ❤️",
-"हर मुस्कान के पीछे एक कहानी होती है, जिसे सिर्फ दिल समझता है। 🌸"
+hi:[
+"कुछ एहसास शब्दों में बयां नहीं किए जा सकते, उन्हें सिर्फ दिल महसूस कर सकता है।",
+"जिंदगी बहुत कुछ सिखाती है और कुछ यादें हमेशा दिल में रहती हैं।"
+],
+hinglish:[
+"Kuch ehsaas lafzon mein bayan nahi hote, unhe sirf dil mehsoos karta hai.",
+"Zindagi bahut kuch sikhati hai aur kuch yaadein hamesha saath rehti hain."
+],
+bn:[
+"কিছু অনুভূতি ভাষায় প্রকাশ করা যায় না, শুধু হৃদয় দিয়ে অনুভব করা যায়।",
+"জীবন আমাদের অনেক কিছু শেখায়, আর কিছু স্মৃতি চিরকাল মনে থেকে যায়।"
 ]},
-Business:{
-English:[
-"Quality, trust and customer satisfaction are the foundation of every successful business. 🤝",
-"Thank you for supporting our business. Your trust inspires us to do better every day! ❤️",
-"Great products and honest service make every customer relationship special. ✨"
+business:{
+en:[
+"Quality, trust and customer satisfaction are the foundation of every successful business.",
+"Good service creates happy customers, and happy customers build a strong business."
 ],
-Hindi:[
-"गुणवत्ता, भरोसा और ग्राहकों की संतुष्टि ही हर सफल व्यापार की असली पहचान है। 🤝",
-"हमारे व्यापार को समर्थन देने के लिए धन्यवाद। आपका विश्वास हमें हर दिन बेहतर बनने की प्रेरणा देता है! ❤️",
-"बेहतरीन उत्पाद और ईमानदार सेवा हर ग्राहक के साथ एक खास रिश्ता बनाते हैं। ✨"
+hi:[
+"गुणवत्ता, भरोसा और ग्राहक संतुष्टि ही एक सफल व्यवसाय की असली पहचान है।",
+"अच्छी सेवा ग्राहकों का विश्वास जीतती है और व्यवसाय को आगे बढ़ाती है।"
+],
+hinglish:[
+"Quality, trust aur customer satisfaction hi ek successful business ki asli pehchan hai.",
+"Achhi service customers ka bharosa jeetti hai aur business ko aage badhati hai."
+],
+bn:[
+"গুণমান, বিশ্বাস এবং গ্রাহকের সন্তুষ্টিই একটি সফল ব্যবসার আসল ভিত্তি।",
+"ভালো পরিষেবা গ্রাহকের বিশ্বাস অর্জন করে এবং ব্যবসাকে এগিয়ে নিয়ে যায়।"
 ]},
-Love:{
-English:[
-"True friendship is a beautiful gift that makes life's journey brighter. ❤️",
-"Some people make ordinary moments unforgettable. Cherish them! 🌹",
-"Love and kindness make the world a more beautiful place. ❤️"
+love:{
+en:[
+"True friendship is one of life's most beautiful gifts. Value the people who stand beside you.",
+"Real connections are built with care, trust and understanding."
 ],
-Hindi:[
-"सच्ची दोस्ती एक खूबसूरत तोहफा है, जो जिंदगी के सफर को और भी सुंदर बना देती है। ❤️",
-"कुछ लोग साधारण पलों को भी यादगार बना देते हैं। उनकी कदर कीजिए! 🌹",
-"प्यार और दयालुता इस दुनिया को और भी खूबसूरत बनाते हैं। ❤️"
+hi:[
+"सच्ची दोस्ती जिंदगी का सबसे खूबसूरत तोहफा है। उन लोगों की कद्र करें जो आपके साथ खड़े रहते हैं।",
+"रिश्ते प्यार, भरोसे और समझदारी से मजबूत बनते हैं।"
+],
+hinglish:[
+"Sachi dosti zindagi ka sabse khoobsurat tohfa hai. Apne apno ki kadar karo.",
+"Rishte pyaar, bharose aur samajh se mazboot bante hain."
+],
+bn:[
+"সত্যিকারের বন্ধুত্ব জীবনের অন্যতম সুন্দর উপহার। যারা পাশে থাকে তাদের মূল্য দিন।",
+"ভালোবাসা, বিশ্বাস আর বোঝাপড়ায় সম্পর্ক আরও মজবুত হয়।"
 ]},
-Nature:{
-English:[
-"Nature reminds us to slow down, breathe and appreciate the beauty around us. 🌿",
-"Every sunrise brings a fresh beginning and a new reason to smile. ☀️",
-"Find peace in the little moments and beauty in the world around you. 🌸"
+nature:{
+en:[
+"Nature reminds us to slow down, breathe deeply and appreciate the beauty around us.",
+"Every sunrise brings a new reason to smile and a fresh opportunity to explore."
 ],
-Hindi:[
-"प्रकृति हमें सिखाती है कि थोड़ा ठहरें, सुकून से सांस लें और आसपास की खूबसूरती को महसूस करें। 🌿",
-"हर सूर्योदय एक नई शुरुआत और मुस्कुराने की नई वजह लेकर आता है। ☀️",
-"छोटे-छोटे पलों में सुकून और अपने आसपास की दुनिया में खूबसूरती तलाशिए। 🌸"
+hi:[
+"प्रकृति हमें रुककर सांस लेने और अपने आसपास की खूबसूरती को महसूस करने की सीख देती है।",
+"हर नया सूरज मुस्कुराने और नई शुरुआत करने का मौका लेकर आता है।"
+],
+hinglish:[
+"Nature humein rukna, gehri saans lena aur aas paas ki khoobsurati mehsoos karna sikhati hai.",
+"Har naya sunrise ek nayi umeed aur muskurane ki wajah lekar aata hai."
+],
+bn:[
+"প্রকৃতি আমাদের থামতে, গভীরভাবে শ্বাস নিতে এবং চারপাশের সৌন্দর্য উপভোগ করতে শেখায়।",
+"প্রতিটি নতুন সূর্যোদয় নতুন আশা নিয়ে আসে।"
 ]},
-Success:{
-English:[
-"Dream big, work honestly and stay patient. Your efforts matter! 🏆",
-"Every achievement begins with a small step and a strong determination. 🚀",
-"Build your future with courage, consistency and confidence. ✨"
+success:{
+en:[
+"Dream big, work honestly and keep moving forward. Success begins with determination.",
+"Your future is shaped by the efforts you make today. Keep learning and growing."
 ],
-Hindi:[
-"बड़े सपने देखिए, ईमानदारी से मेहनत कीजिए और धैर्य रखिए। आपकी मेहनत जरूर मायने रखती है! 🏆",
-"हर बड़ी उपलब्धि की शुरुआत एक छोटे कदम और मजबूत इरादे से होती है। 🚀",
-"हिम्मत, निरंतर मेहनत और आत्मविश्वास के साथ अपना भविष्य बनाइए। ✨"
+hi:[
+"बड़े सपने देखिए, ईमानदारी से मेहनत कीजिए और आगे बढ़ते रहिए। सफलता की शुरुआत हौसले से होती है।",
+"आपका भविष्य आज की मेहनत से बनता है। सीखते रहिए और आगे बढ़ते रहिए।"
+],
+hinglish:[
+"Bade sapne dekho, imaandari se mehnat karo aur aage badhte raho. Success zaroor milegi.",
+"Tumhara future aaj ki mehnat se banta hai. Seekhte raho aur grow karte raho."
+],
+bn:[
+"বড় স্বপ্ন দেখুন, সততার সঙ্গে পরিশ্রম করুন এবং এগিয়ে চলুন। সফলতার শুরু আত্মবিশ্বাস থেকে।",
+"আজকের পরিশ্রমই আপনার ভবিষ্যৎ গড়ে তোলে। শিখুন এবং এগিয়ে যান।"
 ]},
-Funny:{
-English:[
-"Life is short, so laugh whenever you get the chance! 😂",
-"Taking life seriously is optional. Smiling is always a good idea! 😄",
-"My plans are perfect until reality joins the conversation! 😂"
+funny:{
+en:[
+"Life is short. Smile while you still have your favourite snacks!",
+"I am not lazy. I am just saving my energy for something important!"
 ],
-Hindi:[
-"जिंदगी छोटी है, इसलिए जब भी मौका मिले खुलकर हंसिए! 😂",
-"जिंदगी को हमेशा गंभीरता से लेना जरूरी नहीं, मुस्कुराना हमेशा अच्छा विचार है! 😄",
-"मेरी सारी योजनाएं तब तक शानदार होती हैं, जब तक हकीकत सामने नहीं आती! 😂"
+hi:[
+"जिंदगी छोटी है, इसलिए मुस्कुराते रहिए और अपने पसंदीदा खाने का आनंद लीजिए!",
+"मैं आलसी नहीं हूं, बस अपनी ऊर्जा बचाकर रख रहा हूं!"
+],
+hinglish:[
+"Life chhoti hai, isliye haste raho aur favourite snacks enjoy karo!",
+"Main lazy nahi hoon, bas apni energy save kar raha hoon!"
+],
+bn:[
+"জীবন ছোট, তাই হাসিখুশি থাকুন আর পছন্দের খাবার উপভোগ করুন!",
+"আমি অলস নই, শুধু নিজের শক্তি সঞ্চয় করছি!"
+]},
+islamic:{
+en:[
+"Alhamdulillah for every blessing. May Allah guide us towards goodness and keep our hearts grateful.",
+"Trust Allah, keep making dua and do your best with sincerity."
+],
+hi:[
+"हर नेमत के लिए अल्हम्दुलिल्लाह। अल्लाह हमें नेकी के रास्ते पर चलने की तौफीक दे।",
+"अल्लाह पर भरोसा रखिए, दुआ करते रहिए और नेक इरादे से मेहनत कीजिए।"
+],
+hinglish:[
+"Har nemat ke liye Alhamdulillah. Allah humein neki ke raste par chalne ki taufeeq de.",
+"Allah par bharosa rakho, dua karte raho aur achhe irade se mehnat karo."
+],
+bn:[
+"প্রতিটি নিয়ামতের জন্য আলহামদুলিল্লাহ। আল্লাহ আমাদের সৎ পথে চলার তৌফিক দিন।",
+"আল্লাহর উপর ভরসা রাখুন, দোয়া করুন এবং সততার সঙ্গে চেষ্টা চালিয়ে যান।"
+]},
+festival:{
+en:[
+"May this special celebration bring happiness, peace and togetherness to every home.",
+"Celebrating beautiful traditions, joyful moments and the spirit of togetherness!"
+],
+hi:[
+"यह खास त्योहार हर घर में खुशियां, शांति और प्यार लेकर आए।",
+"खूबसूरत परंपराओं, खुशियों और एकता के इस त्योहार का जश्न मनाएं!"
+],
+hinglish:[
+"Yeh khaas festival har ghar mein khushiyan, sukoon aur pyaar lekar aaye.",
+"Khoobsurat traditions aur khushiyon ke saath festival celebrate karein!"
+],
+bn:[
+"এই বিশেষ উৎসব প্রতিটি ঘরে আনন্দ, শান্তি ও ভালোবাসা নিয়ে আসুক।",
+"সুন্দর ঐতিহ্য আর আনন্দের মুহূর্ত নিয়ে উৎসব উদযাপন করুন!"
+]},
+birthday:{
+en:[
+"Happy Birthday! May your new year of life be filled with happiness, success and beautiful memories.",
+"Another year, another reason to celebrate life. Wishing you a wonderful birthday!"
+],
+hi:[
+"जन्मदिन की हार्दिक शुभकामनाएं! आपका जीवन खुशियों, सफलता और खूबसूरत यादों से भरा रहे।",
+"जीवन का एक और खूबसूरत साल शुरू हो रहा है। जन्मदिन मुबारक हो!"
+],
+hinglish:[
+"Happy Birthday! Tumhari zindagi khushiyon, success aur khoobsurat yaadon se bhari rahe.",
+"Life ka ek aur beautiful year shuru. Birthday bahut bahut mubarak!"
+],
+bn:[
+"শুভ জন্মদিন! আপনার জীবন আনন্দ, সাফল্য এবং সুন্দর স্মৃতিতে ভরে উঠুক।",
+"জীবনের আরও একটি সুন্দর বছর শুরু হলো। জন্মদিনের অনেক শুভেচ্ছা!"
+]},
+promotion:{
+en:[
+"Discover quality products and friendly service. We are always happy to serve you!",
+"Looking for reliable products? Visit us and explore what we have to offer."
+],
+hi:[
+"बेहतरीन उत्पाद और अच्छी सेवा के लिए हमसे जुड़ें। आपकी सेवा करना हमारे लिए खुशी की बात है!",
+"अच्छे और भरोसेमंद उत्पादों की तलाश है? आज ही हमारे यहां आइए!"
+],
+hinglish:[
+"Quality products aur friendly service ke liye humse judein. Aapka swagat hai!",
+"Achhe aur reliable products chahiye? Aaj hi hamari shop visit karein!"
+],
+bn:[
+"উন্নত মানের পণ্য এবং ভালো পরিষেবার জন্য আমাদের সঙ্গে থাকুন। আপনাকে স্বাগতম!",
+"ভালো ও নির্ভরযোগ্য পণ্য খুঁজছেন? আজই আমাদের দোকানে আসুন!"
+]},
+life:{
+en:[
+"Life is not about being perfect. It is about learning, improving and becoming better every day.",
+"Be kind, stay humble and remember that every person has a story worth understanding."
+],
+hi:[
+"जिंदगी परफेक्ट होने के बारे में नहीं, बल्कि हर दिन कुछ नया सीखने और बेहतर बनने के बारे में है।",
+"दयालु बनिए, विनम्र रहिए और याद रखिए कि हर इंसान की अपनी एक कहानी होती है।"
+],
+hinglish:[
+"Life perfect hone ke baare mein nahi, har din kuch naya seekhne aur better banne ke baare mein hai.",
+"Kind bano, humble raho aur yaad rakho har insaan ki apni ek kahani hoti hai."
+],
+bn:[
+"জীবন নিখুঁত হওয়ার বিষয় নয়, প্রতিদিন নতুন কিছু শেখা এবং আরও ভালো হওয়ার বিষয়।",
+"দয়ালু হন, বিনয়ী থাকুন এবং মনে রাখুন প্রত্যেক মানুষের একটি নিজস্ব গল্প আছে।"
 ]}
 };
 
+const extraText = {
+en:"Keep moving forward, stay positive and never forget how far you have come.",
+hi:"आगे बढ़ते रहिए, सकारात्मक रहिए और अपनी अब तक की मेहनत को कभी मत भूलिए।",
+hinglish:"Aage badhte raho, positive raho aur apni mehnat ko kabhi mat bhoolo.",
+bn:"এগিয়ে চলুন, ইতিবাচক থাকুন এবং নিজের পরিশ্রমকে কখনো ভুলবেন না।"
+};
+
+const tags = {
+motivational:["Motivation","NeverGiveUp","StayPositive","Inspiration"],
+emotional:["Emotional","HeartTouching","Feelings","LifeQuotes"],
+business:["Business","CustomerService","BusinessGrowth","Entrepreneur"],
+love:["Friendship","Love","TrueFriendship","Togetherness"],
+nature:["Nature","Travel","BeautifulPlaces","Explore"],
+success:["Success","DreamBig","HardWork","KeepGrowing"],
+funny:["Funny","Smile","GoodVibes","JustForFun"],
+islamic:["Islam","Alhamdulillah","Dua","Faith"],
+festival:["Festival","Celebration","Happiness","Together"],
+birthday:["HappyBirthday","BirthdayWishes","Celebration","Blessings"],
+promotion:["ShopNow","QualityProducts","BestService","Shopping"],
+life:["LifeLessons","BeKind","Wisdom","PositiveLife"]
+};
+
+let currentCaption = "";
+let currentHashtags = "";
+
+function randomItem(arr){
+ return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function getLanguageText(language, category){
+ const data = captions[category];
+ if(language === "both"){
+  return data.en.map((item,i)=>item+"\n"+data.hi[i]).join("\n\n");
+ }
+ return randomItem(data[language]);
+}
+
 function generateCaption(){
- const platform=document.getElementById("platform").value;
- const language=document.getElementById("language").value;
- const category=document.getElementById("category").value;
- const topic=document.getElementById("topic").value.trim();
+ const category = document.getElementById("category").value;
+ const language = document.getElementById("language").value;
+ const length = document.getElementById("length").value;
+ const topic = document.getElementById("topic").value.trim();
 
- if(!topic){
-  alert("Please enter your topic first!");
-  return;
+ let result = getLanguageText(language,category);
+
+ if(length === "medium" || length === "long"){
+  if(language === "both"){
+   result += "\n\n"+extraText.en+"\n"+extraText.hi;
+  }else{
+   result += "\n\n"+extraText[language];
+  }
  }
 
- const options=templates[category];
- const index=Math.floor(Math.random()*options.English.length);
- const english=options.English[index];
- const hindi=options.Hindi[index];
+ if(length === "long"){
+  const endings = {
+   en:"Remember, every new day is another opportunity to make a positive difference.",
+   hi:"याद रखिए, हर नया दिन कुछ अच्छा करने का एक नया अवसर है।",
+   hinglish:"Yaad rakho, har naya din kuch achha karne ka ek naya mauka hai.",
+   bn:"মনে রাখবেন, প্রতিটি নতুন দিন ভালো কিছু করার নতুন সুযোগ।"
+  };
+  if(language === "both"){
+   result += "\n\n"+endings.en+"\n"+endings.hi;
+  }else{
+   result += "\n\n"+endings[language];
+  }
+ }
 
- const hashtags={
- Facebook:"#Facebook #SocialMedia #DailyInspiration",
- Instagram:"#Instagram #InstaDaily #Explore",
- YouTube:"#YouTube #NewVideo #ContentCreator"
- };
+ if(topic){
+  const prefix = {
+   en:"Topic: ",
+   hi:"विषय: ",
+   hinglish:"Topic: ",
+   bn:"বিষয়: "
+  };
+  if(language === "both"){
+   result = "Topic: "+topic+"\nविषय: "+topic+"\n\n"+result;
+  }else{
+   result = prefix[language]+topic+"\n\n"+result;
+  }
+ }
 
- let caption="";
- if(language==="English"){
-  caption=english;
- }else if(language==="Hindi"){
-  caption=hindi;
+ currentCaption = result;
+ document.getElementById("captionOutput").value = result;
+ document.getElementById("captionResult").classList.remove("hidden");
+ document.getElementById("downloadResult").classList.remove("hidden");
+}
+
+function generateHashtags(){
+ const category = document.getElementById("category").value;
+ const platform = document.getElementById("platform").value;
+ const topic = document.getElementById("topic").value.trim();
+
+ let list = tags[category].map(tag=>"#"+tag);
+
+ if(platform === "Facebook"){
+  list.push("#FacebookPost","#FacebookCommunity");
+ }else if(platform === "Instagram"){
+  list.push("#Instagram","#InstaDaily");
  }else{
-  caption="🇬🇧 ENGLISH:\n"+english+"\n\n🇮🇳 हिंदी:\n"+hindi;
+  list.push("#YouTube","#YouTubeCreator");
  }
 
- const cleanTopic=topic.replace(/[<>]/g,"").slice(0,200);
- const output=caption+"\n\nTopic: "+cleanTopic+
- "\n\n"+hashtags[platform]+" #"+category.replace(/\s+/g,"");
+ if(topic){
+  const topicTag = topic.replace(/[^a-zA-Z0-9]/g,"");
+  if(topicTag) list.unshift("#"+topicTag.slice(0,30));
+ }
 
- const result=document.getElementById("result");
- result.textContent=output;
- result.hidden=false;
- document.getElementById("copyBtn").hidden=false;
- document.getElementById("againBtn").hidden=false;
+ currentHashtags = [...new Set(list)].join(" ");
+ document.getElementById("hashtagOutput").value = currentHashtags;
+ document.getElementById("hashtagResult").classList.remove("hidden");
+ document.getElementById("downloadResult").classList.remove("hidden");
+}
+
+async function copyText(text){
+ try{
+  await navigator.clipboard.writeText(text);
+  alert("Copied successfully!");
+ }catch(error){
+  const temp = document.createElement("textarea");
+  temp.value = text;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand("copy");
+  temp.remove();
+  alert("Copied successfully!");
+ }
 }
 
 function copyCaption(){
- const text=document.getElementById("result").textContent;
- if(navigator.clipboard && window.isSecureContext){
-  navigator.clipboard.writeText(text).then(()=>{
-   alert("Caption copied successfully!");
-  }).catch(()=>fallbackCopy(text));
- }else{
-  fallbackCopy(text);
- }
+ copyText(currentCaption);
 }
 
-function fallbackCopy(text){
- const area=document.createElement("textarea");
- area.value=text;
- document.body.appendChild(area);
- area.select();
- try{
-  document.execCommand("copy");
-  alert("Caption copied successfully!");
- }catch(e){
-  alert("Please select and copy the caption manually.");
- }
- area.remove();
+function copyHashtags(){
+ copyText(currentHashtags);
+}
+
+function downloadContent(){
+ const content =
+ "MY SOCIAL MEDIA CONTENT\n\n"+
+ "CAPTION:\n"+(currentCaption || "Not generated")+
+ "\n\nHASHTAGS:\n"+(currentHashtags || "Not generated")+
+ "\n\nCreated using Social Media Caption Generator";
+
+ const blob = new Blob([content],{type:"text/plain;charset=utf-8"});
+ const url = URL.createObjectURL(blob);
+ const link = document.createElement("a");
+ link.href = url;
+ link.download = "my-social-media-content.txt";
+ document.body.appendChild(link);
+ link.click();
+ link.remove();
+ URL.revokeObjectURL(url);
 }
 </script>
 </body>
