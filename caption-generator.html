@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Create engaging social media captions and hashtags for Facebook, Instagram and YouTube with our free caption generator.">
+<meta name="theme-color" content="#833ab4">
+<title>Free Social Media Caption Generator</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:20px;min-height:100vh;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+ color:#29232e;
+}
+.container{
+ max-width:720px;margin:35px auto;background:white;
+ padding:28px;border-radius:20px;
+ box-shadow:0 12px 35px #0002;
+}
+h1{text-align:center;color:#833ab4;margin-top:5px}
+.intro{text-align:center;color:#666;line-height:1.6}
+label{display:block;font-weight:bold;margin:18px 0 8px}
+input,select,textarea{
+ width:100%;padding:13px;border:1px solid #ddd;
+ border-radius:10px;font-size:16px;
+}
+textarea{min-height:95px;resize:vertical}
+button{
+ border:0;border-radius:10px;padding:13px 18px;
+ font-size:15px;font-weight:bold;cursor:pointer;
+}
+.generate{
+ width:100%;margin-top:22px;color:white;
+ background:linear-gradient(90deg,#833ab4,#fd1d1d);
+}
+.copy{background:#833ab4;color:white;margin-top:10px}
+.secondary{background:#eee;color:#333;margin-top:10px}
+.result{
+ background:#faf7ff;border:1px solid #e8dafa;
+ border-radius:12px;padding:17px;margin-top:20px;
+ line-height:1.7;white-space:pre-wrap;
+}
+footer{text-align:center;margin-top:25px;color:#777;font-size:13px}
+a{color:#833ab4;text-decoration:none}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>✨ Social Media Caption Generator</h1>
+<p class="intro">
+Create attractive captions and hashtags for your social media posts.
+Free, simple and easy to use!
+</p>
+
+<label for="platform">Choose Platform</label>
+<select id="platform">
+<option value="Facebook">Facebook</option>
+<option value="Instagram">Instagram</option>
+<option value="YouTube">YouTube</option>
+</select>
+
+<label for="category">Choose Caption Category</label>
+<select id="category">
+<option value="Motivational">Motivational</option>
+<option value="Emotional">Emotional</option>
+<option value="Business">Business</option>
+<option value="Love">Love and Friendship</option>
+<option value="Nature">Nature and Travel</option>
+<option value="Success">Success and Dreams</option>
+<option value="Funny">Funny</option>
+</select>
+
+<label for="topic">Enter Your Topic</label>
+<textarea id="topic" placeholder="Example: Never give up on your dreams..."></textarea>
+
+<button class="generate" onclick="generateCaption()">
+✨ Generate Caption
+</button>
+
+<div id="result" class="result" hidden></div>
+
+<button class="copy" id="copyBtn" onclick="copyCaption()" hidden>
+📋 Copy Caption
+</button>
+
+<button class="secondary" id="againBtn" onclick="generateCaption()" hidden>
+🔄 Generate Another
+</button>
+
+<footer>
+<p>Free Social Media Caption Generator</p>
+<p><a href="/">Home</a> | <a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a></p>
+</footer>
+
+</div>
+
+<script>
+const templates = {
+Motivational: [
+"Every new day is another chance to work towards your dreams. Keep believing in yourself! 💪",
+"Success begins when you decide not to give up. Keep moving forward! 🚀",
+"Your journey may be difficult, but every small step takes you closer to your goal. ✨"
+],
+Emotional: [
+"Some feelings cannot be explained in words. They are simply felt by the heart. ❤️",
+"Life teaches us valuable lessons through every experience. Stay strong and keep smiling. ❤️",
+"Behind every smile, there is a story that only the heart understands. 🌸"
+],
+Business: [
+"Quality, trust and customer satisfaction are the foundation of every successful business. 🤝",
+"Thank you for supporting our business. Your trust inspires us to do better every day! ❤️",
+"Great products and honest service make every customer relationship special. ✨"
+],
+Love: [
+"True friendship is a beautiful gift that makes life's journey brighter. ❤️",
+"Some people make ordinary moments unforgettable. Cherish them! 🌹",
+"Love and kindness make the world a more beautiful place. ❤️"
+],
+Nature: [
+"Nature reminds us to slow down, breathe and appreciate the beauty around us. 🌿",
+"Every sunrise brings a fresh beginning and a new reason to smile. ☀️",
+"Find peace in the little moments and beauty in the world around you. 🌸"
+],
+Success: [
+"Dream big, work honestly and stay patient. Your efforts matter! 🏆",
+"Every achievement begins with a small step and a strong determination. 🚀",
+"Build your future with courage, consistency and confidence. ✨"
+],
+Funny: [
+"Life is short, so laugh whenever you get the chance! 😂",
+"Taking life seriously is optional. Smiling is always a good idea! 😄",
+"My plans are perfect until reality joins the conversation! 😂"
+]
+};
+
+function generateCaption(){
+ const platform=document.getElementById("platform").value;
+ const category=document.getElementById("category").value;
+ const topic=document.getElementById("topic").value.trim();
+
+ if(!topic){
+  alert("Please enter your topic first!");
+  return;
+ }
+
+ const options=templates[category];
+ const caption=options[Math.floor(Math.random()*options.length)];
+
+ const cleanTopic=topic.replace(/[<>]/g,"").slice(0,200);
+
+ const hashtags={
+ Facebook:"#Facebook #SocialMedia #DailyInspiration",
+ Instagram:"#Instagram #InstaDaily #Explore",
+ YouTube:"#YouTube #NewVideo #ContentCreator"
+ };
+
+ const output=
+ caption+"\n\nTopic: "+cleanTopic+
+ "\n\n"+hashtags[platform]+
+ " #"+category.replace(/\s+/g,"");
+
+ const result=document.getElementById("result");
+ result.textContent=output;
+ result.hidden=false;
+ document.getElementById("copyBtn").hidden=false;
+ document.getElementById("againBtn").hidden=false;
+}
+
+function copyCaption(){
+ const text=document.getElementById("result").textContent;
+ navigator.clipboard.writeText(text).then(()=>{
+  alert("Caption copied successfully!");
+ }).catch(()=>{
+  alert("Please select and copy the caption manually.");
+ });
+}
+</script>
+</body>
+</html>
