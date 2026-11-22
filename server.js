@@ -11,8 +11,14 @@ const execFileAsync = promisify(execFile);
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ limit: "10kb" }));
-app.use(express.static(__dirname));
 
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain").send(
+    "User-agent: *\nAllow: /\n\nSitemap: https://instagram-downloader-2-7ct4.onrender.com/sitemap.xml\n"
+  );
+});
+
+app.use(express.static(__dirname));
 const activeDownloads = new Set();
 
 app.get("/health", (req, res) => {
