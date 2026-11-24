@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generate creative social media content ideas for Facebook, Instagram and YouTube. Free content idea generator for creators.">
+<meta name="theme-color" content="#6d28d9">
+<title>Social Media Content Idea Generator</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f5f3ff;
+ color:#211b35;
+}
+header{
+ background:linear-gradient(135deg,#6d28d9,#9333ea);
+ color:white;
+ padding:25px 15px;
+ text-align:center;
+}
+header h1{margin:0 0 10px;font-size:27px}
+header p{margin:0;line-height:1.6}
+.container{
+ max-width:850px;
+ margin:25px auto;
+ padding:15px;
+}
+.panel{
+ background:white;
+ padding:22px;
+ border-radius:16px;
+ box-shadow:0 5px 22px rgba(0,0,0,.06);
+ margin-bottom:20px;
+}
+label{
+ display:block;
+ font-weight:bold;
+ margin:15px 0 7px;
+}
+select{
+ width:100%;
+ padding:13px;
+ border:1px solid #ddd;
+ border-radius:9px;
+ background:white;
+ font-size:15px;
+}
+button{
+ border:0;
+ padding:13px 18px;
+ border-radius:9px;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer;
+}
+.generate{
+ width:100%;
+ margin-top:22px;
+ background:#7c3aed;
+ color:white;
+}
+.generate:hover{background:#5b21b6}
+.actions{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:18px;
+}
+.secondary{
+ background:#ede9fe;
+ color:#5b21b6;
+}
+.idea{
+ background:#faf9ff;
+ border:1px solid #e5ddff;
+ border-radius:11px;
+ padding:15px;
+ margin:12px 0;
+}
+.idea h3{
+ margin:0 0 9px;
+ color:#6d28d9;
+ font-size:17px;
+}
+.idea p{line-height:1.6;margin:0}
+.idea small{display:block;margin-top:9px;color:#666}
+#results{display:none}
+.info{line-height:1.8;color:#514b60}
+footer{
+ text-align:center;
+ padding:25px 15px;
+ color:#666;
+}
+footer a{color:#6d28d9;text-decoration:none}
+@media(max-width:500px){
+ header h1{font-size:23px}
+ .panel{padding:17px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <h1>Social Media Content Idea Generator</h1>
+ <p>Discover fresh ideas for your next social media post, Reel or Short.</p>
+</header>
+
+<main class="container">
+
+<section class="panel">
+ <h2>Generate Content Ideas</h2>
+ <p class="info">Choose your platform and content category to discover ideas for your next post.</p>
+
+ <label for="platform">Social Media Platform</label>
+ <select id="platform">
+  <option value="Facebook">Facebook</option>
+  <option value="Instagram">Instagram</option>
+  <option value="YouTube">YouTube</option>
+ </select>
+
+ <label for="category">Content Category</label>
+ <select id="category">
+  <option value="Motivation">Motivation</option>
+  <option value="Education">Education</option>
+  <option value="Business">Business</option>
+  <option value="Technology">Technology</option>
+  <option value="Entertainment">Entertainment</option>
+  <option value="Lifestyle">Lifestyle</option>
+  <option value="Travel">Travel</option>
+  <option value="Food">Food</option>
+  <option value="Personal Growth">Personal Growth</option>
+ </select>
+
+ <label for="format">Content Format</label>
+ <select id="format">
+  <option value="Short video">Short Video / Reel / Short</option>
+  <option value="Image post">Image Post</option>
+  <option value="Carousel">Carousel</option>
+  <option value="Story">Story</option>
+  <option value="Long video">Long Video</option>
+ </select>
+
+ <label for="language">Language</label>
+ <select id="language">
+  <option value="English">English</option>
+  <option value="Hindi">Hindi</option>
+  <option value="Bengali">Bengali</option>
+ </select>
+
+ <button class="generate" onclick="generateIdeas()">✨ Generate 10 Ideas</button>
+</section>
+
+<section class="panel" id="results">
+ <h2>Your Content Ideas</h2>
+ <p id="summary" class="info"></p>
+ <div id="ideaList"></div>
+
+ <div class="actions">
+  <button class="secondary" onclick="copyIdeas()">Copy All</button>
+  <button class="secondary" onclick="downloadIdeas()">Download TXT</button>
+  <button class="secondary" onclick="generateIdeas()">Generate Again</button>
+ </div>
+</section>
+
+<section class="panel">
+ <h2>How to Use This Tool</h2>
+ <div class="info">
+  <p><strong>1.</strong> Choose your social media platform.</p>
+  <p><strong>2.</strong> Select a topic or content category.</p>
+  <p><strong>3.</strong> Choose your preferred content format.</p>
+  <p><strong>4.</strong> Select a language and click Generate.</p>
+  <p><strong>5.</strong> Copy or download your favourite ideas.</p>
+ </div>
+</section>
+
+<section class="panel">
+ <h2>Frequently Asked Questions</h2>
+ <h3>Is this tool free?</h3>
+ <p class="info">Yes. You can generate and download content ideas for free.</p>
+
+ <h3>Does it require an API key?</h3>
+ <p class="info">No. This tool uses built-in content templates and works directly in your browser.</p>
+
+ <h3>Can I use these ideas for my own content?</h3>
+ <p class="info">Yes. Use them as starting points and add your own research, creativity and experience.</p>
+</section>
+
+</main>
+
+<footer>
+ <p>Free Social Media Creator Tools</p>
+ <p>
+  <a href="index.html">Home</a> |
+  <a href="about.html">About</a> |
+  <a href="contact.html">Contact</a> |
+  <a href="privacy.html">Privacy</a> |
+  <a href="terms.html">Terms</a>
+ </p>
+</footer>
+
+<script>
+const ideas = {
+ Motivation:[
+  "Share a personal lesson that changed the way you think.",
+  "Explain why small daily improvements matter.",
+  "Tell a story about overcoming a difficult challenge.",
+  "Share five habits that help you stay motivated.",
+  "Explain why patience is important for success.",
+  "Create a post about learning from mistakes.",
+  "Share a motivational quote and explain its meaning.",
+  "Discuss the importance of consistency.",
+  "Tell your audience about a goal you are working toward.",
+  "Share three lessons you wish you had learned earlier."
+ ],
+ Education:[
+  "Explain a useful concept in simple language.",
+  "Share five interesting facts about your topic.",
+  "Create a beginner's guide to an important skill.",
+  "Explain three common mistakes beginners make.",
+  "Answer a frequently asked question.",
+  "Compare two related concepts.",
+  "Share a step-by-step learning guide.",
+  "Explain a difficult topic using a simple example.",
+  "Create a short educational quiz.",
+  "Recommend useful learning resources and explain why."
+ ],
+ Business:[
+  "Share how a small business solves a customer problem.",
+  "Explain five lessons from starting a business.",
+  "Show how a product or service is used.",
+  "Discuss common mistakes new business owners make.",
+  "Share a simple business planning tip.",
+  "Explain why customer service matters.",
+  "Tell the story behind a business idea.",
+  "Share tips for managing time at work.",
+  "Discuss the importance of customer feedback.",
+  "Explain one business trend in your industry."
+ ],
+ Technology:[
+  "Explain a useful technology feature.",
+  "Share five technology tips for beginners.",
+  "Compare two popular digital tools.",
+  "Explain how technology helps everyday life.",
+  "Share a beginner's guide to an online tool.",
+  "Discuss the benefits and limitations of AI.",
+  "Explain a common technology mistake.",
+  "Review a useful app based on your experience.",
+  "Share a digital safety awareness tip.",
+  "Explain a technology term in simple words."
+ ],
+ Entertainment:[
+  "Create a short original comedy situation.",
+  "Share your favourite movie genre and why.",
+  "Make a fun quiz for your audience.",
+  "Tell a short fictional story with a surprise ending.",
+  "Share a behind-the-scenes creative process.",
+  "Create a relatable everyday-life situation.",
+  "Ask your audience to choose between two options.",
+  "Share an interesting entertainment fact.",
+  "Create a character introduction.",
+  "Tell a funny story inspired by an everyday experience."
+ ],
+ Lifestyle:[
+  "Share a simple daily routine that works for you.",
+  "Discuss a hobby you enjoy and why.",
+  "Share practical organization tips.",
+  "Explain how you plan your week.",
+  "Share a useful lesson from everyday life.",
+  "Show a favourite place in your community.",
+  "Discuss the value of spending time with family.",
+  "Share a simple home organization idea.",
+  "Describe a new skill you are learning.",
+  "Share a personal experience that taught you something."
+ ],
+ Travel:[
+  "Introduce a beautiful place in your region.",
+  "Share a local travel guide.",
+  "Explain what visitors should know before a trip.",
+  "Show interesting local traditions.",
+  "Create a travel budget planning guide.",
+  "Share a memorable travel experience.",
+  "Introduce local food and culture.",
+  "Compare two destinations.",
+  "Share responsible travel tips.",
+  "Create a virtual tour of a famous landmark."
+ ],
+ Food:[
+  "Introduce a favourite traditional dish.",
+  "Share a simple cooking tip.",
+  "Explain the story behind a local recipe.",
+  "Show the steps of preparing a dish.",
+  "Compare two popular foods.",
+  "Share kitchen organization tips.",
+  "Introduce an interesting ingredient.",
+  "Share a family recipe with permission.",
+  "Explain common cooking mistakes.",
+  "Ask your audience about their favourite food."
+ ],
+ "Personal Growth":[
+  "Share one skill you want to improve.",
+  "Explain the value of lifelong learning.",
+  "Discuss how to set realistic goals.",
+  "Share a lesson from a recent experience.",
+  "Explain why asking questions helps learning.",
+  "Discuss how to manage your time.",
+  "Share a book or resource that helped you.",
+  "Explain the importance of self-discipline.",
+  "Discuss how feedback can help you grow.",
+  "Share three things you learned this month."
+ ]
+};
+
+let currentIdeas = [];
+
+function generateIdeas(){
+ const platform=document.getElementById("platform").value;
+ const category=document.getElementById("category").value;
+ const format=document.getElementById("format").value;
+ const language=document.getElementById("language").value;
+
+ const selected=[...ideas[category]];
+ currentIdeas=selected.sort(()=>Math.random()-.5).slice(0,10);
+
+ document.getElementById("summary").textContent=
+ platform+" • "+category+" • "+format+" • "+language;
+
+ document.getElementById("ideaList").innerHTML="";
+
+ currentIdeas.forEach((idea,index)=>{
+  const card=document.createElement("div");
+  card.className="idea";
+
+  const heading=document.createElement("h3");
+  heading.textContent="Idea "+(index+1);
+
+  const paragraph=document.createElement("p");
+  paragraph.textContent=idea;
+
+  const note=document.createElement("small");
+  note.textContent="Suggested format: "+format;
+
+  card.append(heading,paragraph,note);
+  document.getElementById("ideaList").appendChild(card);
+ });
+
+ document.getElementById("results").style.display="block";
+ document.getElementById("results").scrollIntoView({behavior:"smooth"});
+}
+
+function copyIdeas(){
+ if(!currentIdeas.length)return;
+
+ const text=currentIdeas.map((idea,index)=>
+  (index+1)+". "+idea
+ ).join("\n");
+
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text)
+   .then(()=>alert("Ideas copied!"))
+   .catch(()=>fallbackCopy(text));
+ }else{
+  fallbackCopy(text);
+ }
+}
+
+function fallbackCopy(text){
+ const area=document.createElement("textarea");
+ area.value=text;
+ document.body.appendChild(area);
+ area.select();
+ document.execCommand("copy");
+ area.remove();
+ alert("Ideas copied!");
+}
+
+function downloadIdeas(){
+ if(!currentIdeas.length)return;
+
+ const content="SOCIAL MEDIA CONTENT IDEAS\n\n"+
+ currentIdeas.map((idea,index)=>(index+1)+". "+idea).join("\n\n");
+
+ const blob=new Blob([content],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const link=document.createElement("a");
+ link.href=url;
+ link.download="social-media-content-ideas.txt";
+ link.click();
+ URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
