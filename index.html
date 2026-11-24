@@ -133,15 +133,14 @@
   </p>
 </section>
   
-  <footer>
+<footer style="text-align:center;font-size:12px;line-height:1.7;color:#888;margin-top:25px;padding:20px;">
   <p>
     Only download content you own or are authorized to save.
     Respect copyright and Instagram's terms.
   </p>
 
   <nav aria-label="Footer navigation"
-       style="display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:15px">
-
+       style="display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:15px;">
     <a href="/">Home</a>
     <a href="/about.html">About Us</a>
     <a href="/contact.html">Contact Us</a>
@@ -149,20 +148,19 @@
     <a href="/terms.html">Terms of Service</a>
     <a href="/caption-generator.html">Caption Generator</a>
     <a href="/bio-generator.html">Instagram Bio Generator</a>
+    <a href="/word-counter.html">Word Counter</a>
   </nav>
-<footer>
+
   <p>© 2026 Instagram Downloader. All rights reserved.</p>
-  <p>
-    <a href="/">Home</a> |
-    <a href="/about.html">About Us</a> |
-    <a href="/privacy.html">Privacy Policy</a> |
-    <a href="/terms.html">Terms & Conditions</a> |
-    <a href="/contact.html">Contact</a>
-  </p>
 </footer>
-</main><script>
+</main>
+
+<script>
 const form=document.querySelector('#form'),input=document.querySelector('#url'),statusBox=document.querySelector('#status'),submit=document.querySelector('#submit');
 function show(message,type=''){statusBox.textContent=message;statusBox.className='status '+type;}
 document.querySelector('#paste').addEventListener('click',async()=>{try{input.value=await navigator.clipboard.readText();show('Link pasted. Press Download video.','ok')}catch{show('Clipboard access unavailable. Paste the link into the box.')}});
 form.addEventListener('submit',async e=>{e.preventDefault();const url=input.value.trim();if(!url){show('Please paste an Instagram link.','error');return;}submit.disabled=true;submit.textContent='⏳ Preparing download…';show('Checking the public post. Please wait…');try{const response=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const type=response.headers.get('content-type')||'';if(!response.ok){const data=type.includes('application/json')?await response.json():{error:'Download failed.'};throw new Error(data.error||'Download failed.');}const blob=await response.blob();const disposition=response.headers.get('content-disposition')||'';const match=disposition.match(/filename="?([^";]+)"?/i);const filename=match?match[1]:'instagram-video.mp4';const objectUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=objectUrl;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(objectUrl);show('Your video download has started.','ok');}catch(err){show(err.message||'Something went wrong. Please try again.','error');}finally{submit.disabled=false;submit.textContent='⬇ Download video';}});
-</script></body></html>
+</script>
+</body>
+</html>
+
