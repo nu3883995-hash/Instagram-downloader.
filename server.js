@@ -27,18 +27,8 @@ app.get("/sitemap.xml", (req, res) => {
   <url><loc>https://instagram-downloader-2-7ct4.onrender.com/privacy.html</loc></url>
   <url><loc>https://instagram-downloader-2-7ct4.onrender.com/terms.html</loc></url>
   <url><loc>https://instagram-downloader-2-7ct4.onrender.com/caption-generator.html</loc></url>
-</urlset>`);
-});
-
-app.get("/sitemap.xml", (req, res) => {
-  res.type("application/xml").send(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/</loc></url>
-  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/about.html</loc></url>
-  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/contact.html</loc></url>
-  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/privacy.html</loc></url>
-  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/terms.html</loc></url>
-  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/caption-generator.html</loc></url>
+  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/bio-generator.html</loc></url>
+  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/word-counter.html</loc></url>
 </urlset>`);
 });
 
