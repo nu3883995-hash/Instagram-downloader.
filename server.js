@@ -29,6 +29,7 @@ app.get("/sitemap.xml", (req, res) => {
   <url><loc>https://instagram-downloader-2-7ct4.onrender.com/caption-generator.html</loc></url>
   <url><loc>https://instagram-downloader-2-7ct4.onrender.com/bio-generator.html</loc></url>
   <url><loc>https://instagram-downloader-2-7ct4.onrender.com/word-counter.html</loc></url>
+  <url><loc>https://instagram-downloader-2-7ct4.onrender.com/content-idea-generator.html</loc></url>
 </urlset>`);
 });
 
