@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a stylish Instagram bio for free. Generate creative, professional, funny and motivational Instagram bio ideas.">
+<title>Free Instagram Bio Generator | Tool</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f6fb;color:#202238}
+header{background:#17172e;color:white;padding:22px 15px;text-align:center}
+header h1{margin:0;font-size:25px}
+header p{color:#d7d7ee;margin:9px 0 0}
+nav{background:white;padding:13px;text-align:center;border-bottom:1px solid #ddd}
+nav a{color:#5145cd;text-decoration:none;margin:0 9px;font-size:14px}
+main{max-width:720px;margin:28px auto;padding:0 15px}
+.panel{background:white;border-radius:15px;padding:23px;box-shadow:0 5px 22px #15152b10}
+h2{margin-top:0}
+label{display:block;font-weight:bold;margin:17px 0 8px}
+input,select{width:100%;padding:13px;border:1px solid #d8d8e4;border-radius:8px;font-size:15px;background:white}
+button{border:0;border-radius:8px;padding:13px 18px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:#635bdb;color:white;width:100%;margin-top:22px}
+.secondary{background:#eeeaff;color:#5145cd}
+.result{background:#f7f6ff;border:1px solid #dedaff;border-radius:10px;padding:15px;margin-top:15px;line-height:1.7;overflow-wrap:anywhere}
+.bio{margin-bottom:12px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+#results{margin-top:22px}
+footer{text-align:center;padding:25px;color:#666;font-size:13px}
+@media(max-width:480px){.panel{padding:17px}header h1{font-size:22px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Instagram Bio Generator</h1>
+<p>Create a stylish Instagram bio for free</p>
+</header>
+
+<nav>
+<a href="/">Home</a>
+<a href="/caption-generator.html">Caption Generator</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+</nav>
+
+<main>
+<section class="panel">
+<h2>Create Your Instagram Bio ✨</h2>
+<p>Enter a few details and generate creative bio ideas for your profile.</p>
+
+<label for="name">Your name (optional)</label>
+<input id="name" maxlength="40" placeholder="Example: Alex">
+
+<label for="topic">Your interest or profession</label>
+<input id="topic" maxlength="60" placeholder="Example: Photography, Student, Business">
+
+<label for="style">Choose your bio style</label>
+<select id="style">
+<option value="professional">Professional</option>
+<option value="creative">Creative</option>
+<option value="motivational">Motivational</option>
+<option value="funny">Funny</option>
+<option value="simple">Simple</option>
+<option value="creator">Content Creator</option>
+<option value="business">Business</option>
+</select>
+
+<label for="emoji">Emoji preference</label>
+<select id="emoji">
+<option value="yes">With emojis</option>
+<option value="no">Without emojis</option>
+</select>
+
+<button class="primary" onclick="generateBios()">Generate Instagram Bios</button>
+<div id="results"></div>
+</section>
+</main>
+
+<footer>
+<p>Free Instagram Bio Generator</p>
+<p><a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms</a> · <a href="/contact.html">Contact</a></p>
+</footer>
+
+<script>
+const templates={
+professional:[
+"Building ideas into reality.",
+"Focused on growth, creativity and success.",
+"Passionate about learning and making an impact."
+],
+creative:[
+"Creating my own little world.",
+"Dreaming in colours and creating every day.",
+"Turning ordinary moments into something special."
+],
+motivational:[
+"Dream big. Work hard. Stay humble.",
+"Small steps every day lead to big changes.",
+"Believe in yourself and keep moving forward."
+],
+funny:[
+"Professional overthinker.",
+"Too busy making memories to explain myself.",
+"Powered by dreams and unlimited snacks."
+],
+simple:[
+"Living, learning and growing.",
+"Just being myself.",
+"Making every moment count."
+],
+creator:[
+"Creating content with a purpose.",
+"Sharing ideas, stories and inspiration.",
+"Creating something new every day."
+],
+business:[
+"Helping ideas grow into businesses.",
+"Quality, creativity and customer satisfaction.",
+"Building value through passion and hard work."
+]
+};
+
+function clean(value){
+return value.trim().replace(/[<>]/g,"");
+}
+
+function generateBios(){
+const name=clean(document.getElementById("name").value);
+const topic=clean(document.getElementById("topic").value);
+const style=document.getElementById("style").value;
+const useEmoji=document.getElementById("emoji").value==="yes";
+const results=document.getElementById("results");
+const ideas=templates[style];
+const icons=useEmoji?["✨","🚀","🌟","💡","📍","🎯"]:["","","","","",""];
+const topicLine=topic ? " | "+topic : "";
+
+const bios=ideas.map((idea,i)=>{
+const icon=icons[i]||"";
+return (name ? name+" "+(useEmoji?"✨":"")+" \n":"")+
+idea+topicLine+(useEmoji?" "+icon:"");
+});
+
+results.innerHTML="<h3>Your Bio Ideas</h3>";
+bios.forEach((bio,i)=>{
+const card=document.createElement("div");
+card.className="result";
+const text=document.createElement("div");
+text.className="bio";
+text.textContent=bio;
+const actions=document.createElement("div");
+actions.className="actions";
+const copy=document.createElement("button");
+copy.className="secondary";
+copy.textContent="Copy Bio";
+copy.onclick=async()=>{
+try{
+await navigator.clipboard.writeText(bio);
+copy.textContent="Copied!";
+}catch(e){
+copy.textContent="Select and copy";
+}
+};
+actions.appendChild(copy);
+card.appendChild(text);
+card.appendChild(actions);
+results.appendChild(card);
+});
+}
+</script>
+</body>
+</html>
