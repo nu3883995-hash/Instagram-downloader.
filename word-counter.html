@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free online word and character counter. Count words, characters, sentences, paragraphs and reading time instantly.">
+<title>Free Word & Character Counter</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f5fb;color:#25243a;font-family:Arial,sans-serif}
+header{background:linear-gradient(120deg,#5145cd,#8c52d9);color:white;text-align:center;padding:30px 15px}
+header h1{margin:0;font-size:27px}
+header p{margin:10px 0 0;color:#eeeaff}
+nav{text-align:center;background:white;padding:14px;border-bottom:1px solid #eee}
+nav a{color:#5145cd;text-decoration:none;margin:0 10px;font-size:14px}
+main{max-width:850px;margin:30px auto;padding:0 15px}
+.panel{background:white;border-radius:16px;padding:23px;box-shadow:0 5px 25px #25243a0c}
+textarea{width:100%;height:230px;padding:16px;border:1px solid #dcdce8;border-radius:10px;resize:vertical;font-size:15px;line-height:1.6;outline-color:#7164e8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.stat{background:#f5f3ff;padding:17px 8px;text-align:center;border-radius:11px}
+.stat strong{display:block;font-size:25px;color:#5145cd;margin-bottom:5px}
+.stat span{font-size:13px;color:#666}
+.actions{display:flex;gap:10px;margin-top:17px;flex-wrap:wrap}
+button{padding:12px 19px;border:0;border-radius:8px;font-weight:bold;cursor:pointer;font-size:14px}
+.copy{background:#5145cd;color:white}
+.clear{background:#eeeef5;color:#444}
+.info{line-height:1.7;color:#666;margin-top:25px}
+footer{text-align:center;padding:25px;color:#777;font-size:13px}
+@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}.panel{padding:16px}header h1{font-size:23px}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Word & Character Counter</h1>
+<p>Count words, characters and more instantly for free.</p>
+</header>
+
+<nav>
+<a href="/">Home</a>
+<a href="/caption-generator.html">Caption Generator</a>
+<a href="/bio-generator.html">Bio Generator</a>
+</nav>
+
+<main>
+<section class="panel">
+<h2>Enter or Paste Your Text</h2>
+<p style="color:#777">Start typing or paste your text below. Your statistics update automatically.</p>
+
+<textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+
+<div class="stats">
+<div class="stat"><strong id="words">0</strong><span>Words</span></div>
+<div class="stat"><strong id="characters">0</strong><span>Characters</span></div>
+<div class="stat"><strong id="noSpaces">0</strong><span>Without Spaces</span></div>
+<div class="stat"><strong id="sentences">0</strong><span>Sentences</span></div>
+<div class="stat"><strong id="paragraphs">0</strong><span>Paragraphs</span></div>
+<div class="stat"><strong id="reading">0 min</strong><span>Reading Time</span></div>
+</div>
+
+<div class="actions">
+<button class="copy" id="copyBtn">Copy Text</button>
+<button class="clear" id="clearBtn">Clear Text</button>
+</div>
+
+<div id="message" style="margin-top:12px;color:#5145cd;font-size:13px" aria-live="polite"></div>
+</section>
+
+<section class="panel info" style="margin-top:22px">
+<h2>About Word & Character Counter</h2>
+<p>This free online tool helps you count words, characters, sentences and paragraphs in your text. It is useful for writing social media captions, articles, essays, messages and descriptions.</p>
+<h3>How to use</h3>
+<ol>
+<li>Type or paste your text into the box.</li>
+<li>View your word and character statistics instantly.</li>
+<li>Copy your text or clear the box when finished.</li>
+</ol>
+<p>Your text is processed in your browser by this tool.</p>
+</section>
+</main>
+
+<footer>
+<p>Free Online Word & Character Counter</p>
+<a href="/about.html">About</a> ·
+<a href="/contact.html">Contact</a> ·
+<a href="/privacy.html">Privacy Policy</a> ·
+<a href="/terms.html">Terms</a>
+</footer>
+
+<script>
+const input=document.getElementById("textInput");
+
+function countText(){
+const text=input.value;
+const trimmed=text.trim();
+
+const words=trimmed ? trimmed.split(/\s+/u).length : 0;
+const characters=text.length;
+const noSpaces=text.replace(/\s/g,"").length;
+
+const sentences=trimmed
+? (trimmed.match(/[.!?]+(?=\s|$)|[.!?]+$/g)||[]).length
+: 0;
+
+const paragraphs=trimmed
+? trimmed.split(/\n\s*\n/).filter(p=>p.trim()).length
+: 0;
+
+const reading=words===0?0:Math.ceil(words/200);
+
+document.getElementById("words").textContent=words;
+document.getElementById("characters").textContent=characters;
+document.getElementById("noSpaces").textContent=noSpaces;
+document.getElementById("sentences").textContent=sentences;
+document.getElementById("paragraphs").textContent=paragraphs;
+document.getElementById("reading").textContent=reading+" min";
+}
+
+input.addEventListener("input",countText);
+
+document.getElementById("copyBtn").addEventListener("click",async()=>{
+const message=document.getElementById("message");
+if(!input.value){
+message.textContent="Please enter some text first.";
+return;
+}
+try{
+await navigator.clipboard.writeText(input.value);
+message.textContent="Text copied successfully!";
+}catch{
+message.textContent="Copy unavailable. Please select and copy the text manually.";
+}
+});
+
+document.getElementById("clearBtn").addEventListener("click",()=>{
+input.value="";
+countText();
+document.getElementById("message").textContent="Text cleared.";
+});
+
+countText();
+</script>
+</body>
+</html>
